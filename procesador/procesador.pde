@@ -1,6 +1,7 @@
 int numero1, numero2, numero3, numero4, numero5;
 int timer;
 char []keyP = {'1','2','3'};
+boolean key = false;
 int bin;
 int move1=160;
 int c2=12,c=12;
@@ -8,22 +9,37 @@ int c2=12,c=12;
 
 
 void setup(){
+  noLoop();
   fullScreen();
   background(255);
 }
 
 void draw(){
-  //operacion1();  
-  textSize(12);
-  
+  //Pantalla inicial
+  if(!key){
+    home();
+    textSize(12);
+  } else {
+    background(255);
+    operacion1(); 
+  }
+}
+
+void home(){
+  textSize(50);
+  fill(0);
+  text("Presiona 1 para realizar ((8^3)+24)-(250+36)", (width/2)-540, (height/2)-300);
+  text("Presiona 2 para realizar ((00011000 AND 00111110) OR !(11001101)", (width/2)-850, (height/2));
+  text("Presiona 3 para realizar [((11^2)+135)/3]+21", (width/2)-540, (height/2)+300);
 }
 
 void keyTyped(){
   for(int i=0;i<keyP.length;i++){
       if(keyP[i] == '1'){
-        background(255);
         println("Operación 1 seleccionada: ((8^3)+24)-(250+36)");
         operacion1();
+        key = true;
+        redraw();
     } /*else if(keyP[i] == '2'){
         println("Operación 2 seleccionada: ((8^3)+24)-(250+36)");
         operacion1();
@@ -38,7 +54,7 @@ void operacion1(){
   int a=(width/2)+410;
   int d=(width/2)+489;
   int b9=(height/2)-343,b8=(height/2)-343,b7=(height/2)-145,b6=(height/2)-170,
-      b5=(height/2)-196,b4=(height/2)-447, b3=(height/2)-381 ,b2=(height/2)-13,
+      b5=(height/2)-196,b4=(height/2)-445, b3=(height/2)-381 ,b2=(height/2)-13,
       b=(height/2)-13;
   
   memoria();
@@ -102,7 +118,8 @@ void operacion1(){
   }
   //decodificador
   for (int i=0;i<8;i++){
-    text("00000000", (width/2)-618, b3+=c);
+    String pos = binary(i,8);
+    text(pos, (width/2)-618, b3+=c);
   }
   //memoria
   for (int i=0;i<32;i++){
@@ -249,7 +266,7 @@ void contador(){
   x=(width/2)-370;
   y=(height/2)-450;
   w=75;
-  h=200;
+  h=205;
   r=20;
   
   fill(0);
